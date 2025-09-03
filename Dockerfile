@@ -4,10 +4,11 @@ WORKDIR /app
 COPY .mvn/ .mvn
 COPY mvnw .
 COPY pom.xml .
+#Permissao de execucao
+RUN chmod +x mvnw
 RUN ./mvnw dependency:go-offline
 COPY src ./src
 RUN ./mvnw clean package -DskipTests
-
 # Estagio 2: Imagem Final de Execucao
 FROM eclipse-temurin:21-jre-jammy
 WORKDIR /app
